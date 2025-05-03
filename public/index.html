@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>VueLight</title>
@@ -11,9 +10,49 @@
   <h1>VueLight</h1>
   <input id="flight" placeholder="Flight Number"><br>
   <button onclick="saveInfo()">Send</button>
+
   <h2>Your Flight Info</h2>
   <div id="infoDisplay"></div>
   <div id="extraInfo"></div>
-  <script src="script.js"></script>
+
+  <script>
+    async function saveInfo() {
+      const flight = document.getElementById("flight").value;
+      try {
+        const response = await fetch(`/check-flight/${flight}`);
+        const data = await response.json();
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+
+        const info = {
+          flight: data.flight_number,
+          gate: data.departure_gate || "Desconocida",
+          status: data.status || "Desconocido",
+          delay: data.delay || 0,
+        };
+
+        localStorage.setItem("flightInfo", JSON.stringify(info));
+        displayInfo();
+      } catch (error) {
+        console.error("Error al consultar el vuelo:", error);
+        alert("Error al obtener la información del vuelo.");
+      }
+    }
+
+    function displayInfo() {
+      const stored = localStorage.getItem("flightInfo");
+      if (!stored) return;
+
+      const data = JSON.parse(stored);
+      document.getElementById("infoDisplay").innerText =
+        `${data.flight} | Gate ${data.gate} | ${data.status}`;
+      document.getElementById("extraInfo").innerText =
+        `Delay: ${data.delay} min`;
+    }
+
+    window.onload = displayInfo;
+  </script>
 </body>
 </html>
