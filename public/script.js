@@ -9,13 +9,11 @@ async function saveInfo() {
   try {
     const response = await fetch(`/check-flight/${flight}`);
     
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
     const data = await response.json();
-    if (data.error) {
-      alert(data.error);
+    
+    if (!response.ok || data.error) {
+      console.error("Error de API:", data);
+      alert(`Error: ${data.error || 'Desconocido'}\n${data.message || data.details ? 'Ver consola para más detalles' : ''}`);
       return;
     }
     
