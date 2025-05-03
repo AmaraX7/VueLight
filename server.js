@@ -17,8 +17,7 @@ app.get('/check-flight/:flightNumber', async (req, res) => {
     
     console.log(`Consultando vuelo: ${flightNumber}`);
     
-    try {
-        const response = await axios.get(`https://api.aviationstack.com/v1/flights`, {
+        const response = await axios.get("http://api.aviationstack.com/v1/flights", {
             params: {
                 access_key: apiKey,
                 flight_iata: flightNumber
