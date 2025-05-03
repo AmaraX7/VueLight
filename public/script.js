@@ -42,5 +42,26 @@ function displayInfo() {
   }
 }
 
+// Función para probar la conexión con el servidor
+async function testServerConnection() {
+  try {
+    const response = await fetch('/test');
+    const data = await response.json();
+    console.log('Prueba de conexión al servidor:', data);
+    return data.status === 'ok';
+  } catch (error) {
+    console.error('Error al conectar con el servidor:', error);
+    return false;
+  }
+}
+
 // Ejecutar displayInfo cuando se carga la página
-window.onload = displayInfo;
+window.onload = async function() {
+  displayInfo();
+  
+  // Comprobar conexión con el servidor
+  const serverOk = await testServerConnection();
+  if (!serverOk) {
+    alert('No se pudo conectar con el servidor. Verifica que el servidor esté en ejecución.');
+  }
+};
