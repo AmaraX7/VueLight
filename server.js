@@ -7,8 +7,9 @@ app.use(express.static('public'));
 
 app.get('/check-flight/:flightNumber', async (req, res) => {
     const flightNumber = req.params.flightNumber;
-    const apiKey = '864b8d0f057f81f606dbe761847d8aee'; // pega aquí tu API Key real
-
+    // Es mejor usar variables de entorno para las API keys
+    const apiKey = process.env.AVIATION_API_KEY || '864b8d0f057f81f606dbe761847d8aee';
+    
     try {
         const response = await axios.get(`http://api.aviationstack.com/v1/flights`, {
             params: {
@@ -16,9 +17,8 @@ app.get('/check-flight/:flightNumber', async (req, res) => {
                 flight_iata: flightNumber
             }
         });
-
+        
         const data = response.data;
-
         if (data.data && data.data.length > 0) {
             const flightInfo = data.data[0];
             res.json({
@@ -33,9 +33,13 @@ app.get('/check-flight/:flightNumber', async (req, res) => {
         } else {
             res.status(404).json({ error: 'Vuelo no encontrado' });
         }
-
     } catch (error) {
-        console.error(error);
+        console.error('Error completo:', error);
+        if (error.response) {
+            // La API devolvió un error con status code
+            console.error('Datos de error:', error.response.data);
+            console.error('Status:', error.response.status);
+        }
         res.status(500).json({ error: 'Error al consultar la API' });
     }
 });
