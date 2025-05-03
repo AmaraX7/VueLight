@@ -2,19 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>VueLight</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de Vuelos</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>VueLight</h1>
-  <input id="flight" placeholder="Flight Number"><br>
-  <button onclick="saveInfo()">Send</button>
-
-  <h2>Your Flight Info</h2>
-  <div id="infoDisplay"></div>
-  <div id="extraInfo"></div>
-
+  <h1>Consulta el estado de tu vuelo</h1>
+  <form id="flight-form">
+    <input type="text" id="flight-number" placeholder="Número de vuelo (ej. AA123)" required>
+    <button type="submit">Consultar</button>
+  </form>
+  <div id="result"></div>
   <script src="script.js"></script>
 </body>
 </html>
