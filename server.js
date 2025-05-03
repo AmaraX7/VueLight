@@ -17,6 +17,7 @@ app.get('/check-flight/:flightNumber', async (req, res) => {
   const apiKey = 'TU_API_KEY'; // Sustituye por tu key real de aviationstack
 
   try {
+    // Hacemos la llamada a la API de AviationStack
     const response = await axios.get('http://api.aviationstack.com/v1/flights', {
       params: {
         access_key: apiKey,
@@ -25,8 +26,11 @@ app.get('/check-flight/:flightNumber', async (req, res) => {
     });
 
     const data = response.data;
+
     if (data.data && data.data.length > 0) {
       const flightInfo = data.data[0];
+
+      // Devolvemos la información del vuelo
       res.json({
         airline: flightInfo.airline.name,
         flight_number: flightInfo.flight.iata,
