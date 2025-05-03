@@ -1,0 +1,61 @@
+/* Estilo general del cuerpo */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000000;
+    color: #8f8f8f;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  /* Encabezado principal */
+  h1 {
+    color: #FFCC00;
+    margin-top: 20px;
+  }
+  
+  /* Estilo para el input */
+  input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 300px;
+  }
+  
+  /* Botón */
+  button {
+    font-size: 15px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Contenedor de información */
+  #infoDisplay {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    display: inline-block;
+    text-align: left;
+  }
+
+  #extraInfo {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    display: inline-block;
+    text-align: left;
+  }
