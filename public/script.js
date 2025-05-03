@@ -7,7 +7,7 @@ async function saveInfo() {
   }
   
   try {
-    const response = await fetch(`/check-flight/${flight}`);
+   const response = await fetch(`/check-flight/${flight}`);
     
     const data = await response.json();
     
@@ -36,9 +36,11 @@ function displayInfo() {
   const storedData = localStorage.getItem("flightInfo");
   if (storedData) {
     const data = JSON.parse(storedData);
-    document.getElementById("infoDisplay").innerText =
-      `${data.flight} | Gate ${data.gate} | ${data.status}`;
-    document.getElementById("extraInfo").innerText = `Delay: ${data.delay} min`;
+   document.getElementById("infoDisplay").innerText =
+  `${data.flight} | Gate ${data.gate} | ${data.status}`;
+document.getElementById("extraInfo").innerText =
+  `Delay: ${data.delay} min`;
+
   }
 }
 
